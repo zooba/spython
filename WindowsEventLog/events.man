@@ -1,0 +1,103 @@
+<instrumentationManifest
+    xmlns="http://schemas.microsoft.com/win/2004/08/events" 
+    xmlns:win="http://manifests.microsoft.com/win/2004/08/windows/events"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <instrumentation>
+        <events>
+            <provider name="Example-SPythonProvider" 
+                guid="{29BD9A17-BE83-4FF9-A9F5-FFF5E3C358DE}" 
+                symbol="PROVIDER_GUID" 
+                resourceFileName="spython.exe" 
+                messageFileName="spython.exe"
+                message="$(string.Provider.Name)">
+                <channels>
+                    <channel chid="Operational"
+                             name="Example-SPython/Operational"
+                             type="Operational"
+                             enabled="true" />
+                </channels>
+                <tasks>
+                    <task name="Import"
+                          symbol="TASK_IMPORT"
+                          value="1"
+                          message="$(string.Task.Import)">
+                        <opcodes>
+                            <opcode name="Import_Resolve"
+                                    symbol="OPCODE_IMPORT_RESOLVE"
+                                    value="10"
+                                    message="$(string.Opcode.Import.Resolve)" />
+                            <opcode name="Import_Open"
+                                    symbol="OPCODE_IMPORT_OPEN"
+                                    value="11"
+                                    message="$(string.Opcode.Import.Open)" />
+                            <opcode name="Import_Compile"
+                                    symbol="OPCODE_IMPORT_COMPILE"
+                                    value="12"
+                                    message="$(string.Opcode.Import.Compile)" />
+                        </opcodes>
+                    </task>
+                </tasks>
+                
+                <templates>
+                    <template tid="Import_Resolve">
+                        <data name="name" inType="win:AnsiString" outType="win:Utf8"/>
+                        <data name="syspath" inType="win:AnsiString" outType="win:Utf8"/>
+                    </template>
+                    <template tid="Import_Open">
+                        <data name="path" inType="win:AnsiString" outType="win:Utf8"/>
+                    </template>
+                    <template tid="Import_Compile">
+                        <data name="code" inType="win:AnsiString" outType="win:Utf8"/>
+                        <data name="filename" inType="win:AnsiString" outType="win:Utf8"/>
+                    </template>
+                </templates>
+
+                <events>
+                    <event value="1"
+                           level="win:Informational"
+                           task="Import"
+                           opcode="Import_Resolve"
+                           template="Import_Resolve"
+                           channel="Operational"
+                           symbol="IMPORT_RESOLVE"
+                           message="$(string.Event.Import.Resolve)" />
+                    <event value="2"
+                           level="win:Informational"
+                           task="Import"
+                           opcode="Import_Open"
+                           template="Import_Open"
+                           channel="Operational"
+                           symbol="IMPORT_OPEN"
+                           message="$(string.Event.Import.Open)" />
+                    <event value="3"
+                           level="win:Informational"
+                           task="Import"
+                           opcode="Import_Compile"
+                           template="Import_Compile"
+                           channel="Operational"
+                           symbol="IMPORT_COMPILE"
+                           message="$(string.Event.Import.Compile)" />
+                </events>
+            </provider>
+        </events>
+    </instrumentation>
+
+    <localization>
+        <resources culture="en-US">
+            <stringTable>
+                <string id="Provider.Name" value="Example-SPythonProvider"/>
+                
+                <string id="Task.Import" value="Import"/>
+                <string id="Opcode.Import.Open" value="Open module"/>
+                <string id="Opcode.Import.Compile" value="Compile"/>
+                <string id="Opcode.Import.Resolve" value="Resolve module"/>
+
+                <string id="Event.Import.Open" value="Opening %1"/>
+                <string id="Event.Import.Compile" value="Compiling from %2:%n%1"/>
+                <string id="Event.Import.Resolve" value="Resolving %1 in %2"/>
+            </stringTable>
+        </resources>
+    </localization>
+
+</instrumentationManifest>

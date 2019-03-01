@@ -5,7 +5,7 @@ This repository contains sample implementations of CPython entry points
 using the hooks added in [PEP 578](https://www.python.org/dev/peps/pep-0578/).
 
 For now, you will need to build Python yourself with the 
-[pep551](https://github.com/zooba/cpython/tree/pep551) branch from
+[pep-578](https://github.com/zooba/cpython/tree/pep-578) branch from
 https://github.com/zooba/cpython/ to be able to use these samples.
 
 LogToStdErr

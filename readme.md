@@ -20,6 +20,16 @@ Two points are worth calling out:
 * `compile` is handled specially to avoid printing the full code of
   every module
 
+WindowsCatFile
+--------------
+
+The implementation in [`WindowsCatFile`](https://github.com/zooba/spython/tree/master/WindowsCatFile)
+uses a signed `python_lib.cat` file to verify all imported modules.
+
+See the readme in that directory for more information.
+
+This sample only works on Windows.
+
 WindowsEventLog
 ---------------
 

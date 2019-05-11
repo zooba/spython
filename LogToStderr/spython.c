@@ -85,12 +85,12 @@ default_spython_hook(const char *event, PyObject *args, void *userData)
 }
 
 static PyObject *
-spython_open_for_import(PyObject *path, void *userData)
+spython_open_code(PyObject *path, void *userData)
 {
     static PyObject *io = NULL;
     PyObject *stream = NULL, *buffer = NULL, *err = NULL;
 
-    if (PySys_Audit("spython.open_for_import", "O", path) < 0) {
+    if (PySys_Audit("spython.open_code", "O", path) < 0) {
         return NULL;
     }
 
@@ -132,7 +132,7 @@ int
 wmain(int argc, wchar_t **argv)
 {
     PySys_AddAuditHook(default_spython_hook, NULL);
-    PyImport_SetOpenForImportHook(spython_open_for_import, NULL);
+    PyFile_SetOpenCodeHook(spython_open_code, NULL);
     return Py_Main(argc, argv);
 }
 #else
@@ -140,7 +140,7 @@ int
 main(int argc, char **argv)
 {
     PySys_AddAuditHook(default_spython_hook, NULL);
-    PyImport_SetOpenForImportHook(spython_open_for_import, NULL);
+    PyFile_SetOpenCodeHook(spython_open_code, NULL);
     return _Py_UnixMain(argc, argv);
 }
 #endif

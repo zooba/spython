@@ -20,10 +20,17 @@ Two points are worth calling out:
 * `compile` is handled specially to avoid printing the full code of
   every module
 
+NetworkPrompt
+-------------
+
+The implementation in [`NetworkPrompt`](NetworkPrompt) is a very
+simplistic hook that prompts the user on every `socket.*` event.
+If the user types `n`, the process is aborted.
+
 WindowsCatFile
 --------------
 
-The implementation in [`WindowsCatFile`](https://github.com/zooba/spython/tree/master/WindowsCatFile)
+The implementation in [`WindowsCatFile`](WindowsCatFile)
 uses a signed `python_lib.cat` file to verify all imported modules.
 
 See the readme in that directory for more information.
@@ -33,7 +40,7 @@ This sample only works on Windows.
 WindowsEventLog
 ---------------
 
-The implementation in [`WindowsEventLog`](https://github.com/zooba/spython/tree/master/WindowsEventLog)
+The implementation in [`WindowsEventLog`](WindowsEventLog)
 writes a selection of events to a section of the Windows event log.
 
 See the readme in that directory for more information.

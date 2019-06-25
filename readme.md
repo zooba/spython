@@ -4,9 +4,9 @@ spython
 This repository contains sample implementations of CPython entry points
 using the hooks added in [PEP 578](https://www.python.org/dev/peps/pep-0578/).
 
-For now, you will need to build Python yourself with the 
-[pep-578](https://github.com/zooba/cpython/tree/pep-578) branch from
-https://github.com/zooba/cpython/ to be able to use these samples.
+Python 3.8 is required for these samples, or you can build Python yourself
+from the [3.8](https://github.com/python/cpython/tree/3.8) or
+[master](https://github.com/python/cpython) branch.
 
 LogToStdErr
 -----------

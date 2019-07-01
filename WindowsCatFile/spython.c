@@ -14,15 +14,17 @@ static wchar_t wszCatalog[512];
 static int
 default_spython_hook(const char *event, PyObject *args, void *userData)
 {
-    if (!Py_IsInitialized()) {
-        return 0;
+    if (strcmp(event, "cpython.run_command") == 0) {
+        PyErr_SetString(PyExc_RuntimeError, "use of '-c' is disabled");
+        return -1;
     }
 
     return 0;
 }
 
 static int
-verify_trust(HANDLE hFile) {
+verify_trust(HANDLE hFile)
+{
     static const GUID action = WINTRUST_ACTION_GENERIC_VERIFY_V2;
     BYTE hash[256];
     wchar_t memberTag[256];
@@ -158,7 +160,7 @@ wmain(int argc, wchar_t **argv)
     wcscpy(wcsrchr(wszCatalog, L'\\') + 1, L"DLLs\\python_lib.cat");
 
     PySys_AddAuditHook(default_spython_hook, NULL);
-    PyFile_SetOpenCodeHook(spython_open_code, NULL);
+    /*PyFile_SetOpenCodeHook(spython_open_code, NULL);*/
     int result = Py_Main(argc, argv);
 
     return result;

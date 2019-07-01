@@ -141,6 +141,6 @@ main(int argc, char **argv)
 {
     PySys_AddAuditHook(default_spython_hook, NULL);
     PyFile_SetOpenCodeHook(spython_open_code, NULL);
-    return _Py_UnixMain(argc, argv);
+    return Py_BytesMain(argc, argv);
 }
 #endif

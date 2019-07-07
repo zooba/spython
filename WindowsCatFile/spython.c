@@ -160,7 +160,7 @@ wmain(int argc, wchar_t **argv)
     wcscpy(wcsrchr(wszCatalog, L'\\') + 1, L"DLLs\\python_lib.cat");
 
     PySys_AddAuditHook(default_spython_hook, NULL);
-    /*PyFile_SetOpenCodeHook(spython_open_code, NULL);*/
+    PyFile_SetOpenCodeHook(spython_open_code, NULL);
     int result = Py_Main(argc, argv);
 
     return result;

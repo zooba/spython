@@ -137,7 +137,7 @@ default_spython_hook(const char *event, PyObject *args, void *userData)
 }
 
 static PyObject *
-spython_open_for_import(PyObject *path, void *userData)
+spython_open_code(PyObject *path, void *userData)
 {
     static PyObject *io = NULL;
     PyObject *stream = NULL, *buffer = NULL, *err = NULL;
@@ -196,7 +196,7 @@ wmain(int argc, wchar_t **argv)
     EventRegisterExample_SPythonProvider();
 
     PySys_AddAuditHook(default_spython_hook, NULL);
-    PyImport_SetOpenForImportHook(spython_open_for_import, NULL);
+    PyFile_SetOpenCodeHook(spython_open_code, NULL);
     res = Py_Main(argc, argv);
     
     EventUnregisterExample_SPythonProvider();

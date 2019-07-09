@@ -46,3 +46,15 @@ writes a selection of events to a section of the Windows event log.
 See the readme in that directory for more information.
 
 This sample only works on Windows.
+
+linux_xattr
+-----------
+
+The implementation in [`linux_xattr`](linux_xattr) is a proof of
+concept for Linux. It verifies all imported modules by hashing their
+content with OpenSSL and comparing the hashes against stored hashes in
+extended file attributes.
+
+See the readme in that directory for more information.
+
+This sample only works on Linux and requires OpenSSL and libseccomp.

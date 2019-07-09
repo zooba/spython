@@ -5,3 +5,5 @@ obj/
 *.pdb
 *.ilk
 *.obj
+*.o
+/linux_xattr/spython

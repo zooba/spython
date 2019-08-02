@@ -115,7 +115,11 @@ amsi_scan_bytes(PyObject *buffer, PyObject *filename, AmsiContext *context)
     }
 
     if (AmsiResultIsMalware(result)) {
-        PyErr_SetString(PyExc_OSError, "compilation blocked by security policy");
+        PyErr_SetString(
+            PyExc_OSError,
+            "Compilation blocked by antimalware scan. "
+            "Check your antimalware protection history for details."
+        );
         return -1;
     }
 

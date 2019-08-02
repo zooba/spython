@@ -1,5 +1,5 @@
 WindowsAMSI
-=========================
+===========
 
 This sample uses the [Antimalware Scan Interface](https://docs.microsoft.com/windows/win32/amsi/) (AMSI) available in Windows 10 or Windows Server 2016 to allow active antimalware software to scan dynamically compiled Python code.
 

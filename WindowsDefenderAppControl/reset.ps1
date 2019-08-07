@@ -1,4 +1,4 @@
-del -EA 0 C:\Windows\System32\CodeIntegrity\SiPolicy.bin
+del -EA 0 "${env:SystemRoot}\System32\CodeIntegrity\SiPolicy.bin"
 $r = Invoke-CimMethod -Namespace root/microsoft/Windows/CI -ClassName PS_UpdateAndCompareCIPolicy -MethodName Delete
 
 if ($r.ReturnValue) {

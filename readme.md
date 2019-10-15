@@ -20,6 +20,9 @@ Two points are worth calling out:
 * `compile` is handled specially to avoid printing the full code of
   every module
 
+See also `LogToStderrMinimal`, which is the shortest possible code that
+displays a message for each event.
+
 NetworkPrompt
 -------------
 

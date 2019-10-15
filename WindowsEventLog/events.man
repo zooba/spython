@@ -1,19 +1,19 @@
 <instrumentationManifest
-    xmlns="http://schemas.microsoft.com/win/2004/08/events" 
+    xmlns="http://schemas.microsoft.com/win/2004/08/events"
     xmlns:win="http://manifests.microsoft.com/win/2004/08/windows/events"
     xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
     <instrumentation>
         <events>
-            <provider name="Example-SPythonProvider" 
-                guid="{29BD9A17-BE83-4FF9-A9F5-FFF5E3C358DE}" 
-                symbol="PROVIDER_GUID" 
-                resourceFileName="spython.exe" 
+            <provider name="Example-PythonProvider"
+                guid="{29BD9A17-BE83-4FF9-A9F5-FFF5E3C358DE}"
+                symbol="PROVIDER_GUID"
+                resourceFileName="spython.exe"
                 messageFileName="spython.exe"
                 message="$(string.Provider.Name)">
                 <channels>
                     <channel chid="Operational"
-                             name="Example-SPython/Operational"
+                             name="Example-Python/Operational"
                              type="Operational"
                              enabled="true" />
                 </channels>
@@ -38,7 +38,7 @@
                         </opcodes>
                     </task>
                 </tasks>
-                
+
                 <templates>
                     <template tid="Import_Resolve">
                         <data name="name" inType="win:AnsiString" outType="win:Utf8"/>
@@ -86,8 +86,8 @@
     <localization>
         <resources culture="en-US">
             <stringTable>
-                <string id="Provider.Name" value="Example-SPythonProvider"/>
-                
+                <string id="Provider.Name" value="Example-PythonProvider"/>
+
                 <string id="Task.Import" value="Import"/>
                 <string id="Opcode.Import.Open" value="Open module"/>
                 <string id="Opcode.Import.Compile" value="Compile"/>

@@ -193,12 +193,12 @@ wmain(int argc, wchar_t **argv)
 {
     int res;
 
-    EventRegisterExample_SPythonProvider();
+    EventRegisterExample_PythonProvider();
 
     PySys_AddAuditHook(default_spython_hook, NULL);
     PyFile_SetOpenCodeHook(spython_open_code, NULL);
     res = Py_Main(argc, argv);
     
-    EventUnregisterExample_SPythonProvider();
+    EventUnregisterExample_PythonProvider();
     return res;
 }

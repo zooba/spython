@@ -11,8 +11,9 @@ from the [3.8](https://github.com/python/cpython/tree/3.8) or
 LogToStdErr
 -----------
 
-The implementation in `LogToStderr` is nearly the simplest possible
-code. It takes every event and prints its arguments to standard error.
+The implementation in [`LogToStderr`](LogToStderr) is nearly the simplest
+possible code. It takes every event and prints its arguments to standard
+error.
 
 Two points are worth calling out:
 * during initialisation, it does not render arguments, but this is only
@@ -20,20 +21,32 @@ Two points are worth calling out:
 * `compile` is handled specially to avoid printing the full code of
   every module
 
+Also see [`LogToStderrMinimal`](LogToStderrMinimal), which is actually
+the simplest possible code to displays a message for each event.
+
 NetworkPrompt
 -------------
 
-The implementation in [`NetworkPrompt`](NetworkPrompt) is a very
-simplistic hook that prompts the user on every `socket.*` event.
-If the user types `n`, the process is aborted.
+The implementation in [`NetworkPrompt`](NetworkPrompt) is a hook that
+prompts the user on every `socket.*` event. If the user types `n`, the
+process is aborted.
+
+The `network_prompt.py` module uses a Python hook to implement the same
+prompt.
+
+StartupControl
+--------------
+
+The implementation in [`StartupControl`](StartupControl) limits how
+Python may be launched and requires that a startup file is specified.
+This prevents the use of the `-c` and `-m` options, as well as
+interactive mode.
 
 WindowsCatFile
 --------------
 
 The implementation in [`WindowsCatFile`](WindowsCatFile)
 uses a signed `python_lib.cat` file to verify all imported modules.
-
-See the readme in that directory for more information.
 
 This sample only works on Windows.
 
@@ -43,9 +56,15 @@ WindowsEventLog
 The implementation in [`WindowsEventLog`](WindowsEventLog)
 writes a selection of events to a section of the Windows event log.
 
-See the readme in that directory for more information.
-
 This sample only works on Windows.
+
+syslog
+------
+
+The implementation in [`syslog`](syslog) writes a selection of events
+to the current syslog listener.
+
+This sample requires a syslog implementation.
 
 linux_xattr
 -----------

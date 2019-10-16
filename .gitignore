@@ -8,3 +8,4 @@ obj/
 *.o
 **/spython
 **/spython.log
+__pycache__/

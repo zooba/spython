@@ -24,7 +24,6 @@
     <Deny ID="ID_DENY_SQLITE3" FriendlyName="sqlite3" FileName="sqlite3.dll" MinimumFileVersion="65535.65535.65535.65535" />
     <Deny ID="ID_DENY_LIBSSL" FileName="libssl" MinimumFileVersion="65535.65535.65535.65535" />
     <Deny ID="ID_DENY_CTYPES" FileName="_ctypes.pyd" MinimumFileVersion="65535.65535.65535.65535" />
-    <Allow ID="ID_ALLOW_SPYTHON" FileName="spython.exe" />
   </FileRules>
   <Signers>
     <Signer ID="ID_SIGNER_PSF" Name="Python Software Foundation">
@@ -35,7 +34,6 @@
     <SigningScenario Value="12" ID="ID_SIGNINGSCENARIO_WINDOWS">
       <ProductSigners>
         <FileRulesRef>
-          <FileRuleRef RuleID="ID_ALLOW_SPYTHON" />
         </FileRulesRef>
         <AllowedSigners>
           <AllowedSigner SignerId="ID_SIGNER_PSF">

@@ -3,10 +3,18 @@ $start = (Get-Date).AddSeconds(-2)
 "Removing old policy..."
 $r = Invoke-CimMethod -Namespace root/microsoft/Windows/CI -ClassName PS_UpdateAndCompareCIPolicy -MethodName Delete
 
+"Enabling SPython in new policy..."
+$spython = Get-SystemDriver -ScanPath . -UserPEs -NoScript -NoShadowCopy -PathToCatroot .
+$rules = New-CIPolicyRule -DriverFiles `
+    ($spython | ?{ $_.FileName -ieq "spython.exe" }) `
+    -Level Hash `
+    -Fallback FileName
+
 "Merging new policy..."
 $m = Merge-CIPolicy -PolicyPaths `
     "${env:SystemRoot}\schemas\CodeIntegrity\ExamplePolicies\AllowMicrosoft.xml", `
     .\policy.xml `
+    -Rules $rules `
     -OutputFilePath merged.xml
 if (-not $?) {
     exit

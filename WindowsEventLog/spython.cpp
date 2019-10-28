@@ -10,6 +10,7 @@ hook_compile(const char *event, PyObject *args)
     PyObject *code, *filename;
     const char *u8code = NULL, *u8filename = NULL;
 
+    /* Avoid doing extra work if the event won't be recorded */
     if (!EventEnabledIMPORT_COMPILE()) {
         return 0;
     }
@@ -141,17 +142,10 @@ spython_open_code(PyObject *path, void *userData)
 {
     static PyObject *io = NULL;
     PyObject *stream = NULL, *buffer = NULL, *err = NULL;
+    PyObject *exc_type, *exc_value, *exc_tb;
 
-    if (!PyUnicode_Check(path)) {
-        PyErr_SetString(PyExc_TypeError, "open_for_import requires string argument");
-        return NULL;
-    }
-
-    const char *ext = strrchr(PyUnicode_AsUTF8(path), '.');
-    if (ext && stricmp(ext, ".pyc") == 0) {
-        PyErr_SetString(PyExc_IOError, "cannot import from .pyc files");
-        return NULL;
-    }
+    /* path is always provided as PyUnicodeObject */
+    assert(PyUnicode_Check(path));
 
     EventWriteIMPORT_OPEN(PyUnicode_AsUTF8(path));
 
@@ -170,13 +164,21 @@ spython_open_code(PyObject *path, void *userData)
 
     buffer = PyObject_CallMethod(stream, "read", "(i)", -1);
 
-    if (!buffer) {
-        Py_DECREF(stream);
-        return NULL;
-    }
-
+    /* Carefully preserve any exception while we close
+     * the stream.
+     */
+    PyErr_Fetch(&exc_type, &exc_value, &exc_tb);
     err = PyObject_CallMethod(stream, "close", NULL);
     Py_DECREF(stream);
+    if (!buffer) {
+        /* An error occurred reading, so raise that one */
+        PyErr_Restore(exc_type, exc_value, exc_tb);
+        return NULL;
+    }
+    /* These should be clear, but xdecref just in case */
+    Py_XDECREF(exc_type);
+    Py_XDECREF(exc_value);
+    Py_XDECREF(exc_tb);
     if (!err) {
         return NULL;
     }

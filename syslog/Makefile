@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-O0 -g -pipe
+CFLAGS=-O0 -g -pipe -fPIC
 CFLAGS+=$(shell python3.8-config --cflags)
 
 LDFLAGS+=$(shell python3.8-config --ldflags --embed)
